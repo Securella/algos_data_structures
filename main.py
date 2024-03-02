@@ -75,9 +75,6 @@ def main():
         print("Invalid choice. Please enter 1 or 2.")
         return
 
-    target = int(input("Enter the target for binary search: "))
-    number_of_runs = int(input("Enter the number of runs: "))
-
     algorithms = ["Iterative Insertion Sort", "Recursive Insertion Sort", "Iterative Quick Sort",
                   "Recursive Quick Sort", "Binary Search"]
 
@@ -88,11 +85,15 @@ def main():
     choice = int(input("\nEnter your choice (1-5): "))
 
     if 1 <= choice <= len(algorithms):
-        run_algorithm(algorithms[choice - 1], numbers, number_of_runs, target)
+        if algorithms[choice - 1] == "Binary Search":
+            target = int(input("Enter the target for binary search: "))
+            run_algorithm(algorithms[choice - 1], numbers, 1, target)  # Only 1 run for binary search
+        else:
+            number_of_runs = int(input("Enter the number of runs: "))  # Prompt for number of runs for sorting algorithms
+            run_algorithm(algorithms[choice - 1], numbers, number_of_runs, None)  # Pass None for target for sorting algorithms
     else:
         print("Invalid choice. Please enter a number between 1 and 5.")
 
 
 if __name__ == "__main__":
     main()
-
