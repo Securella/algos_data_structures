@@ -31,3 +31,6 @@ def binary_search(numbers: List[int], number_to_find: int, low: int, high: int) 
         return binary_search(numbers, number_to_find, low, middle_position - 1)
     else:
         return binary_search(numbers, number_to_find, middle_position + 1, high)
+
+# TODO: error handling and boundary checks for cases where the input list is not sorted
+# or if the target is out of bounds.
