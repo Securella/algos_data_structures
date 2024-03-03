@@ -1,30 +1,44 @@
 import sys
+import random
 
 # Set recursion limit to avoid RecursionError
 sys.setrecursionlimit(10**6)
 
 
-# Iterative Quick Sort
-def iterative_quick_sort(arr):
-    # Stack for storing indices
+def median_of_three(arr, low, high):
+    mid = (low + high) // 2
+    if arr[low] < arr[mid]:
+        if arr[mid] < arr[high]:
+            return mid
+        elif arr[low] < arr[high]:
+            return high
+        else:
+            return low
+    else:
+        if arr[low] < arr[high]:
+            return low
+        elif arr[mid] < arr[high]:
+            return high
+        else:
+            return mid
+
+
+def random_pivot(arr, low, high):
+    return random.randint(low, high)
+
+
+def first_element_pivot(arr, low, high):
+    return low
+
+
+def iterative_quick_sort(arr, pivot_selector=random_pivot):  # Updated function signature to accept pivot selector
     stack = []
-    # Push initial values of low and high to stack
     stack.append(0)
     stack.append(len(arr) - 1)
-    # Loop to pop from stack while it is not empty
     while stack:
         high = stack.pop()
         low = stack.pop()
-        # Partition the array
-        pivot = arr[high]
-        i = low - 1
-        for j in range(low, high):
-            if arr[j] < pivot:
-                i += 1
-                arr[i], arr[j] = arr[j], arr[i]
-        arr[i + 1], arr[high] = arr[high], arr[i + 1]
-        pivot_index = i + 1
-        # Push subarrays to stack
+        pivot_index = partition(arr, low, high, pivot_selector)  # Pass pivot selector to partition
         if pivot_index - 1 > low:
             stack.append(low)
             stack.append(pivot_index - 1)
@@ -33,25 +47,25 @@ def iterative_quick_sort(arr):
             stack.append(high)
 
 
-def recursive_quick_sort(arr):
-    # Partition function remains the same
-    def partition(arr, low, high):
-        pivot = arr[high]
-        i = low - 1
-        for j in range(low, high):
-            if arr[j] <= pivot:
-                i += 1
-                arr[i], arr[j] = arr[j], arr[i]
-        arr[i + 1], arr[high] = arr[high], arr[i + 1]
-        return i + 1
-
-    # Recursive quick sort function
+def recursive_quick_sort(arr, pivot_selector=random_pivot):  # Updated function signature to accept pivot selector
     def quick_sort_recursive(arr, low, high):
         if low < high:
-            if high - low + 1 <= 1:
-                return
-            pivot_index = partition(arr, low, high)
+            pivot_index = partition(arr, low, high, pivot_selector)  # Pass pivot selector to partition
             quick_sort_recursive(arr, low, pivot_index - 1)
             quick_sort_recursive(arr, pivot_index + 1, high)
 
     quick_sort_recursive(arr, 0, len(arr) - 1)
+
+
+def partition(arr, low, high, pivot_selector):
+    pivot_index = pivot_selector(arr, low, high)  # Use pivot selector to select pivot index
+    arr[pivot_index], arr[high] = arr[high], arr[pivot_index]
+
+    pivot = arr[high]
+    i = low - 1
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1
