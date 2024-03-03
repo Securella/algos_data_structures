@@ -5,7 +5,7 @@ import time
 import random
 
 from sorting_algos.insertion_sort import iterative_insertion_sort, recursive_insertion_sort
-from sorting_algos.quick_sort import iterative_quick_sort, recursive_quick_sort
+from sorting_algos.quick_sort import iterative_quick_sort, recursive_quick_sort, median_of_three, random_pivot, first_element_pivot
 from searching_algos.binary_search import binary_search
 
 
@@ -26,7 +26,7 @@ def generate_sorted_list(size):
     return sorted(random.sample(range(-100, 100), size))
 
 
-def run_algorithm(algorithm, numbers, number_of_runs, target):
+def run_algorithm(algorithm, numbers, number_of_runs, target, pivot_selector):
     total_time = 0
     result = False
     for _ in range(number_of_runs):
@@ -37,9 +37,9 @@ def run_algorithm(algorithm, numbers, number_of_runs, target):
         elif algorithm == "Recursive Insertion Sort":
             recursive_insertion_sort(array)
         elif algorithm == "Iterative Quick Sort":
-            iterative_quick_sort(array)
+            iterative_quick_sort(array, pivot_selector)  # Pass pivot selector to quick sort
         elif algorithm == "Recursive Quick Sort":
-            recursive_quick_sort(array)
+            recursive_quick_sort(array, pivot_selector)  # Pass pivot selector to quick sort
         elif algorithm == "Binary Search":
             result = binary_search(array, target, 0, len(array) - 1)
             if result:
@@ -61,7 +61,6 @@ def run_algorithm(algorithm, numbers, number_of_runs, target):
 
 def main():
     choice = int(input("Enter 1 to read numbers from a text file or 2 to generate random numbers: "))
-
     if choice == 1:
         file_path = input("Enter the file path containing random numbers: ")
         numbers = read_random_numbers(file_path)
@@ -87,10 +86,24 @@ def main():
     if 1 <= choice <= len(algorithms):
         if algorithms[choice - 1] == "Binary Search":
             target = int(input("Enter the target for binary search: "))
-            run_algorithm(algorithms[choice - 1], numbers, 1, target)  # Only 1 run for binary search
+            run_algorithm(algorithms[choice - 1], numbers, 1, target, None)  # Only 1 run for binary search
+        elif algorithms[choice - 1] == "Iterative Quick Sort" or algorithms[choice - 1] == "Recursive Quick Sort":
+            pivot_choice = int(input("Enter the pivot selection method (1. Median-of-three, 2. Random, 3. First element): "))
+            if pivot_choice == 1:
+                pivot_selector = median_of_three
+            elif pivot_choice == 2:
+                pivot_selector = random_pivot
+            elif pivot_choice == 3:
+                pivot_selector = first_element_pivot
+            else:
+                print("Invalid choice. Defaulting to median-of-three pivot selection.")
+                pivot_selector = median_of_three
+
+            number_of_runs = int(input("Enter the number of runs: "))
+            run_algorithm(algorithms[choice - 1], numbers, number_of_runs, None, pivot_selector)
         else:
             number_of_runs = int(input("Enter the number of runs: "))  # Prompt for number of runs for sorting algorithms
-            run_algorithm(algorithms[choice - 1], numbers, number_of_runs, None)  # Pass None for target for sorting algorithms
+            run_algorithm(algorithms[choice - 1], numbers, number_of_runs, None, None)  # Pass None for target for sorting algorithms
     else:
         print("Invalid choice. Please enter a number between 1 and 5.")
 
