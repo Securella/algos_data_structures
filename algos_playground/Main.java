@@ -41,6 +41,9 @@ public class Main {
     }
 
     // Shape class implementing Comparable, with subclasses Circle, Square, and Rectangle
+    // Note: We do not need to define our own Comparable interface because Java provides a built-in Comparable<T> interface in the java.lang package.
+    // This built-in Comparable interface is generic, allowing us to specify the type parameter <T> to enforce type safety. By implementing Comparable<Shape>,
+    // we can use the compareTo method to compare shapes based on area, ensuring compile-time type checking and preventing runtime errors.
     static abstract class Shape implements Comparable<Shape> {
         public abstract double area();
 
@@ -154,5 +157,4 @@ public class Main {
         System.out.println("Output for GenericMemoryCell<String>: " + stringCell.read());
     }
 }
-
 
