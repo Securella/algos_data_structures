@@ -1,4 +1,5 @@
 package algos_data_structures.algos_playground;
+
 // Class for my playground in algorithms and data structures
 public class Main {
 
@@ -104,6 +105,21 @@ public class Main {
         }
     }
 
+    // Generic version of the MemoryCell class
+    public static class GenericMemoryCell<AnyType> {
+        private AnyType storedValue;
+
+        // Method to read the stored value
+        public AnyType read() {
+            return storedValue;
+        }
+
+        // Method to write a value of generic type
+        public void write(AnyType x) {
+            storedValue = x;
+        }
+    }
+
     public static void main(String[] args) {
         // Part 1: Output for Recursive routine to print an integer
         int number = 12345;
@@ -120,10 +136,23 @@ public class Main {
 
         // Part 3: Output for findMax with Shape objects
         Shape[] shapes = { new Circle(2.0), new Square(3.0), new Rectangle(3.0, 4.0) };
-        System.out.println("Max shape: " + findMax(shapes));
+        System.out.println("Output for Max shape: " + findMax(shapes));
 
         // Part 4: Output for findMax with String objects
         String[] names = { "Joe", "Bob", "Bill", "Zeke" };
-        System.out.println("Max string: " + findMax(names));
+        System.out.println("Output for Max string: " + findMax(names));
+
+        // Part 5: Demonstration of GenericMemoryCell with Integer and String
+        // Using GenericMemoryCell with Integer
+        GenericMemoryCell<Integer> intCell = new GenericMemoryCell<>();
+        intCell.write(42);
+        System.out.println("Output for GenericMemoryCell<Integer>: " + intCell.read());
+
+        // Using GenericMemoryCell with String
+        GenericMemoryCell<String> stringCell = new GenericMemoryCell<>();
+        stringCell.write("Hello, Generics!");
+        System.out.println("Output for GenericMemoryCell<String>: " + stringCell.read());
     }
 }
+
+
