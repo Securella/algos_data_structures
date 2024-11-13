@@ -1,5 +1,8 @@
 package algos_data_structures.algos_playground;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 // Class for my playground in algorithms and data structures
 public class Main {
 
@@ -40,10 +43,29 @@ public class Main {
         return arr[maxIndex];
     }
 
+    // Method to calculate the total area of an array of Shape objects
+    public static double totalArea(Shape[] arr) {
+        double total = 0;
+        for (Shape s : arr) {
+            if (s != null) { // Ensure the Shape object is not null
+                total += s.area(); // Add the area of the current Shape to the total
+            }
+        }
+        return total; // Return the sum of all areas
+    }
+
+    // New totalArea method using a Collection with a wildcard
+    public static double totalArea(Collection<? extends Shape> arr) {
+        double total = 0;
+        for (Shape s : arr) {
+            if (s != null) { // Ensure the Shape object is not null
+                total += s.area(); // Add the area of the current Shape to the total
+            }
+        }
+        return total; // Return the sum of all areas
+    }
+
     // Shape class implementing Comparable, with subclasses Circle, Square, and Rectangle
-    // Note: We do not need to define our own Comparable interface because Java provides a built-in Comparable<T> interface in the java.lang package.
-    // This built-in Comparable interface is generic, allowing us to specify the type parameter <T> to enforce type safety. By implementing Comparable<Shape>,
-    // we can use the compareTo method to compare shapes based on area, ensuring compile-time type checking and preventing runtime errors.
     static abstract class Shape implements Comparable<Shape> {
         public abstract double area();
 
@@ -162,6 +184,15 @@ public class Main {
         autoBoxCell.write(5); // Autoboxing occurs here
         int unboxedVal = autoBoxCell.read(); // Unboxing occurs here
         System.out.println("Output for autoboxing and unboxing with diamond operator: Contents are: " + unboxedVal);
+
+        // Part 7: Calculate total area of Shape array
+        System.out.println("Output for total area of shapes array: " + totalArea(shapes));
+
+        // Part 8: Calculate total area of Shape collection (ArrayList with wildcard support)
+        Collection<Shape> shapeCollection = new ArrayList<>();
+        shapeCollection.add(new Circle(2.0));
+        shapeCollection.add(new Square(3.0));
+        shapeCollection.add(new Rectangle(3.0, 4.0));
+        System.out.println("Output for total area of shape collection: " + totalArea(shapeCollection));
     }
 }
-
