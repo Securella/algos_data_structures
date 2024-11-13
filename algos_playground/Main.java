@@ -155,6 +155,13 @@ public class Main {
         GenericMemoryCell<String> stringCell = new GenericMemoryCell<>();
         stringCell.write("Hello, Generics!");
         System.out.println("Output for GenericMemoryCell<String>: " + stringCell.read());
+
+        // Part 6: Autoboxing and unboxing with GenericMemoryCell using diamond operator
+        // Autoboxing: int 5 is automatically converted to Integer
+        GenericMemoryCell<Integer> autoBoxCell = new GenericMemoryCell<>();
+        autoBoxCell.write(5); // Autoboxing occurs here
+        int unboxedVal = autoBoxCell.read(); // Unboxing occurs here
+        System.out.println("Output for autoboxing and unboxing with diamond operator: Contents are: " + unboxedVal);
     }
 }
 
