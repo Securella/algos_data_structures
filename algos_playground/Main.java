@@ -6,6 +6,16 @@ import java.util.Collection;
 // Class for my playground in algorithms and data structures
 public class Main {
 
+    // Method to check if an array contains a specific element
+    public static <AnyType> boolean contains(AnyType[] arr, AnyType x) {
+        for (AnyType val : arr) {
+            if (x.equals(val)) {
+                return true; // Element found
+            }
+        }
+        return false; // Element not found
+    }
+
     // Method to print each digit of a non-negative integer n
     public static void printOut(int n) {
         if (n >= 10)
@@ -77,58 +87,87 @@ public class Main {
 
     static class Circle extends Shape {
         private double radius;
-
+    
         public Circle(double radius) {
             this.radius = radius;
         }
-
+    
         @Override
         public double area() {
             return Math.PI * radius * radius;
         }
-
+    
         @Override
         public String toString() {
             return "Circle with area: " + area();
         }
+    
+        // Override equals method to check for value equality
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (!(obj instanceof Circle)) return false;
+            Circle other = (Circle) obj;
+            return Double.compare(this.radius, other.radius) == 0;
+        }
     }
-
+    
     static class Square extends Shape {
         private double side;
-
+    
         public Square(double side) {
             this.side = side;
         }
-
+    
         @Override
         public double area() {
             return side * side;
         }
-
+    
         @Override
         public String toString() {
             return "Square with area: " + area();
         }
+    
+        // Override equals method to check for value equality
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (!(obj instanceof Square)) return false;
+            Square other = (Square) obj;
+            return Double.compare(this.side, other.side) == 0;
+        }
     }
-
+    
     static class Rectangle extends Shape {
         private double width, height;
-
+    
         public Rectangle(double width, double height) {
             this.width = width;
             this.height = height;
         }
-
+    
         @Override
         public double area() {
             return width * height;
         }
-
+    
         @Override
         public String toString() {
             return "Rectangle with area: " + area();
         }
+    
+        // Override equals method to check for value equality
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (!(obj instanceof Rectangle)) return false;
+            Rectangle other = (Rectangle) obj;
+            return Double.compare(this.width, other.width) == 0 &&
+                   Double.compare(this.height, other.height) == 0;
+        }
     }
+    
 
     // Generic version of the MemoryCell class
     public static class GenericMemoryCell<AnyType> {
@@ -194,5 +233,9 @@ public class Main {
         shapeCollection.add(new Square(3.0));
         shapeCollection.add(new Rectangle(3.0, 4.0));
         System.out.println("Output for total area of shape collection: " + totalArea(shapeCollection));
+
+        // Part 9: Testing the contains method
+        System.out.println("Output for contains method with String array: " + contains(names, "Zeke"));  // true
+        System.out.println("Output for contains method with Shape array: " + contains(shapes, new Square(3.0)));  // true if shapes contains equivalent Square
     }
 }
