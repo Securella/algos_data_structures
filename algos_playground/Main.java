@@ -28,6 +28,82 @@ public class Main {
         }
     }
 
+    // Generic method to find the maximum element in an array of Comparable<T> objects
+    public static <T extends Comparable<T>> T findMax(T[] arr) {
+        int maxIndex = 0;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i].compareTo(arr[maxIndex]) > 0) {
+                maxIndex = i;
+            }
+        }
+        return arr[maxIndex];
+    }
+
+    // Shape class implementing Comparable, with subclasses Circle, Square, and Rectangle
+    static abstract class Shape implements Comparable<Shape> {
+        public abstract double area();
+
+        @Override
+        public int compareTo(Shape other) {
+            return Double.compare(this.area(), other.area());
+        }
+    }
+
+    static class Circle extends Shape {
+        private double radius;
+
+        public Circle(double radius) {
+            this.radius = radius;
+        }
+
+        @Override
+        public double area() {
+            return Math.PI * radius * radius;
+        }
+
+        @Override
+        public String toString() {
+            return "Circle with area: " + area();
+        }
+    }
+
+    static class Square extends Shape {
+        private double side;
+
+        public Square(double side) {
+            this.side = side;
+        }
+
+        @Override
+        public double area() {
+            return side * side;
+        }
+
+        @Override
+        public String toString() {
+            return "Square with area: " + area();
+        }
+    }
+
+    static class Rectangle extends Shape {
+        private double width, height;
+
+        public Rectangle(double width, double height) {
+            this.width = width;
+            this.height = height;
+        }
+
+        @Override
+        public double area() {
+            return width * height;
+        }
+
+        @Override
+        public String toString() {
+            return "Rectangle with area: " + area();
+        }
+    }
+
     public static void main(String[] args) {
         // Part 1: Output for Recursive routine to print an integer
         int number = 12345;
@@ -41,6 +117,13 @@ public class Main {
         Integer wrapperVal = (Integer) m.read(); // Reading the Integer from MemoryCell
         int val = wrapperVal.intValue(); // Converting Integer to int
         System.out.println("Output for Integer wrapper class: Contents are: " + val);
+
+        // Part 3: Output for findMax with Shape objects
+        Shape[] shapes = { new Circle(2.0), new Square(3.0), new Rectangle(3.0, 4.0) };
+        System.out.println("Max shape: " + findMax(shapes));
+
+        // Part 4: Output for findMax with String objects
+        String[] names = { "Joe", "Bob", "Bill", "Zeke" };
+        System.out.println("Max string: " + findMax(names));
     }
 }
-
