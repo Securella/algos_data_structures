@@ -2,6 +2,7 @@ package algos_data_structures.algos_playground;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 
 // Class for my playground in algorithms and data structures
 public class Main {
@@ -26,6 +27,25 @@ public class Main {
             }
         }
         return arr[maxIndex];
+    }
+
+    // New findMax method with Comparator for custom comparisons
+    public static <AnyType> AnyType findMax(AnyType[] arr, Comparator<? super AnyType> cmp) {
+        int maxIndex = 0;
+        for (int i = 1; i < arr.length; i++) {
+            if (cmp.compare(arr[i], arr[maxIndex]) > 0) {
+                maxIndex = i;
+            }
+        }
+        return arr[maxIndex];
+    }
+
+    // Comparator class for case-insensitive comparison of strings
+    static class CaseInsensitiveCompare implements Comparator<String> {
+        @Override
+        public int compare(String lhs, String rhs) {
+            return lhs.compareToIgnoreCase(rhs);
+        }
     }
 
     // Method to check if an array contains a specific element
@@ -214,6 +234,10 @@ public class Main {
         String[] names = { "Joe", "Bob", "Bill", "Zeke" };
         System.out.println("Output for original findMax with String array: " + findMax(names));
         System.out.println("Output for enhanced findMax with String array: " + findMaxEnhanced(names));
+
+        // Comparator-based findMax for case-insensitive comparison
+        String[] animals = { "ZEBRA", "alligator", "crocodile" };
+        System.out.println("Output for comparator-based findMax with String array: " + findMax(animals, new CaseInsensitiveCompare()));
 
         // Output for GenericMemoryCell with Integer and String
         GenericMemoryCell<Integer> intCell = new GenericMemoryCell<>();
