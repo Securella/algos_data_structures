@@ -1,5 +1,20 @@
 package algos_data_structures.seminar_1.task_1;
 
+/*
+ * =============================================================
+ * Project: Seminar 1 in Algorithms and Data Structures
+ * Author: Securella
+ * Year: 2024
+ * Description: This code is part of an individual project for the
+ *              seminar and is intended for examination.
+ * 
+ * Disclaimer:
+ * This is original work created for a seminar assignment. It should
+ * not be copied, shared, or used as a reference for similar projects without permission
+ * Unauthorized use of this code is strictly prohibited by the educational institution.
+ * =============================================================
+ */
+
 public class InsertionSort {
     // Recursive InsertionSort
     public static void insertionSortRecursive(int[] arr, int n) {
