@@ -1,2 +1,2 @@
 # algos_data_structures
-Checking couple of sorting and a searching algorithm
+A repository for study purposes focusing on programming excerices in the book and/or included in the course
