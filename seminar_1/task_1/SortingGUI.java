@@ -23,7 +23,6 @@ import java.util.Scanner;
  * =============================================================
  */
 
-
 /**
  * SortingGUI provides graphical interface for Seminar 1 running and benchmarking 
  * multiple sorting algorithms on varying input sizes, with results saved to CSV file.
@@ -74,34 +73,30 @@ public class SortingGUI extends JFrame {
      * Logs execution times and saves results to CSV file.
      */
     private void runBulkTests() {
-        // Parse array sizes from input field
         String[] sizeStrings = arraySizesField.getText().split(",");
         int[] sizes = new int[sizeStrings.length];
-
+    
         try {
             for (int i = 0; i < sizeStrings.length; i++) {
-                sizes[i] = Integer.parseInt(sizeStrings[i].trim()); // Convert each input to integer
+                sizes[i] = Integer.parseInt(sizeStrings[i].trim());
             }
         } catch (NumberFormatException e) {
             outputArea.append("Invalid array sizes. Please enter valid numbers.\n");
             return;
         }
-
-        // Verify that input file exists
+    
         File inputFile = new File("algos_data_structures/Seminar 1 - File with random numbers.txt");
         if (!inputFile.exists()) {
             outputArea.append("Input file 'Seminar 1 - File with random numbers.txt' not found.\n");
             return;
         }
-
-        // Execute sorting tests in background thread to keep UI responsive
+    
         SwingWorker<Void, Void> worker = new SwingWorker<>() {
             @Override
             protected Void doInBackground() {
                 try (FileWriter writer = new FileWriter("sorting_results.csv")) {
-                    writer.write("Algorithm,Array Size,Execution Time (ms)\n"); // CSV header
-
-                    // List of sorting algorithms to execute
+                    writer.write("Algorithm,Array Size,Execution Time (ms),Repetitions\n");
+    
                     String[] algorithms = {
                         "QuickSort - Recursive (Median Pivot)",
                         "QuickSort - Iterative (Random Pivot)",
@@ -110,50 +105,52 @@ public class SortingGUI extends JFrame {
                         "InsertionSort - Recursive",
                         "InsertionSort - Iterative"
                     };
-
-                    // Configure progress bar to reflect the number of tests
+    
                     progressBar.setMaximum(algorithms.length * sizes.length);
                     int progress = 0;
-
-                    // Execute each algorithm on each array size
+    
+                    final int repetitions = 5; // Repeat each test 5 times
                     for (String algorithm : algorithms) {
                         for (int size : sizes) {
-                            int[] array = loadArray(inputFile, size); // Load random data array
+                            double totalExecutionTime = 0;
+                            int[] array = loadArray(inputFile, size);
+    
                             if (array == null) {
                                 outputArea.append("Error loading array for size " + size + ".\n");
                                 continue;
                             }
-
-                            // Record start time, run sorting algorithm, and record end time
-                            long startTime = System.nanoTime();
-                            switch (algorithm) {
-                                case "QuickSort - Recursive (Median Pivot)":
-                                    QuickSort.quickSortRecursiveMedian(array, 0, array.length - 1);
-                                    break;
-                                case "QuickSort - Iterative (Random Pivot)":
-                                    QuickSort.quickSortIterativeRandom(array);
-                                    break;
-                                case "QuickSort - Recursive (First Pivot)":
-                                    QuickSort.quickSortRecursiveFirstPivot(array, 0, array.length - 1);
-                                    break;
-                                case "QuickSort - Iterative (First Pivot)":
-                                    QuickSort.quickSortIterativeFirstPivot(array);
-                                    break;
-                                case "InsertionSort - Recursive":
-                                    InsertionSort.insertionSortRecursive(array, array.length);
-                                    break;
-                                case "InsertionSort - Iterative":
-                                    InsertionSort.insertionSortIterative(array);
-                                    break;
+    
+                            for (int rep = 0; rep < repetitions; rep++) {
+                                int[] copy = array.clone(); // Clone the array for each repetition
+                                long startTime = System.nanoTime();
+                                switch (algorithm) {
+                                    case "QuickSort - Recursive (Median Pivot)":
+                                        QuickSort.quickSortRecursiveMedian(copy, 0, copy.length - 1);
+                                        break;
+                                    case "QuickSort - Iterative (Random Pivot)":
+                                        QuickSort.quickSortIterativeRandom(copy);
+                                        break;
+                                    case "QuickSort - Recursive (First Pivot)":
+                                        QuickSort.quickSortRecursiveFirstPivot(copy, 0, copy.length - 1);
+                                        break;
+                                    case "QuickSort - Iterative (First Pivot)":
+                                        QuickSort.quickSortIterativeFirstPivot(copy);
+                                        break;
+                                    case "InsertionSort - Recursive":
+                                        InsertionSort.insertionSortRecursive(copy, copy.length);
+                                        break;
+                                    case "InsertionSort - Iterative":
+                                        InsertionSort.insertionSortIterative(copy);
+                                        break;
+                                }
+                                long endTime = System.nanoTime();
+                                totalExecutionTime += (endTime - startTime) / 1e6;
                             }
-                            long endTime = System.nanoTime();
-
-                            // Calculate and log execution time in milliseconds
-                            double executionTime = (endTime - startTime) / 1e6;
-                            writer.write(String.format("%s,%d,%.2f\n", algorithm, size, executionTime));
-                            outputArea.append(String.format("%s - Size %d: %.2f ms\n", algorithm, size, executionTime));
-
-                            // Update progress bar
+    
+                            double averageExecutionTime = totalExecutionTime / repetitions;
+                            writer.write(String.format("%s,%d,%.2f,%d\n", algorithm, size, averageExecutionTime, repetitions));
+                            outputArea.append(String.format("%s - Size %d (Avg over %d): %.2f ms\n", algorithm, size, repetitions, averageExecutionTime));
+    
                             progressBar.setValue(++progress);
                         }
                     }
@@ -163,7 +160,7 @@ public class SortingGUI extends JFrame {
                 }
                 return null;
             }
-        };
+        };   
 
         worker.execute(); // Start task in the background
     }
@@ -204,3 +201,4 @@ public class SortingGUI extends JFrame {
  * by adding the JVM option -Xss100m when running the application.
  * Source: https://www.baeldung.com/jvm-configure-stack-sizes
  */
+
