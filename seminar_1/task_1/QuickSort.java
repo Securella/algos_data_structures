@@ -12,7 +12,7 @@ import java.util.Random;
  * 
  * Disclaimer:
  * This is original work created for a seminar assignment. It should
- * not be copied, shared, or used as a reference for similar projects without permission
+ * not be copied, shared, or used as a reference for similar projects.
  * Unauthorized use of this code is strictly prohibited by the educational institution.
  * =============================================================
  */

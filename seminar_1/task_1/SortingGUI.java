@@ -199,3 +199,8 @@ public class SortingGUI extends JFrame {
     }
 }
 
+/*
+ * To prevent stack overflow for deep recursion, increase the stack size
+ * by adding the JVM option -Xss100m when running the application.
+ * Source: https://www.baeldung.com/jvm-configure-stack-sizes
+ */
