@@ -1,0 +1,31 @@
+Algorithm,Array Size,Execution Time (ms),Repetitions
+QuickSort - Recursive (Median Pivot),100,0,09,5
+QuickSort - Recursive (Median Pivot),1000,0,11,5
+QuickSort - Recursive (Median Pivot),10000,0,64,5
+QuickSort - Recursive (Median Pivot),100000,3,33,5
+QuickSort - Recursive (Median Pivot),1000000,31,18,5
+QuickSort - Iterative (Random Pivot),100,0,09,5
+QuickSort - Iterative (Random Pivot),1000,0,28,5
+QuickSort - Iterative (Random Pivot),10000,0,68,5
+QuickSort - Iterative (Random Pivot),100000,4,95,5
+QuickSort - Iterative (Random Pivot),1000000,50,19,5
+QuickSort - Recursive (First Pivot),100,0,02,5
+QuickSort - Recursive (First Pivot),1000,0,12,5
+QuickSort - Recursive (First Pivot),10000,0,30,5
+QuickSort - Recursive (First Pivot),100000,2,86,5
+QuickSort - Recursive (First Pivot),1000000,30,92,5
+QuickSort - Iterative (First Pivot),100,0,01,5
+QuickSort - Iterative (First Pivot),1000,0,07,5
+QuickSort - Iterative (First Pivot),10000,0,58,5
+QuickSort - Iterative (First Pivot),100000,3,13,5
+QuickSort - Iterative (First Pivot),1000000,31,86,5
+InsertionSort - Recursive,100,0,22,5
+InsertionSort - Recursive,1000,0,59,5
+InsertionSort - Recursive,10000,30,17,5
+InsertionSort - Recursive,100000,1523,05,5
+InsertionSort - Recursive,1000000,149223,78,5
+InsertionSort - Iterative,100,0,04,5
+InsertionSort - Iterative,1000,0,90,5
+InsertionSort - Iterative,10000,8,64,5
+InsertionSort - Iterative,100000,440,56,5
+InsertionSort - Iterative,1000000,44531,46,5

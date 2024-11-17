@@ -1,0 +1,7 @@
+Algorithm,100,1000,10000,100000,1000000
+InsertionSort - Iterative,0.4,0.9,8.64,440.56,44531.46
+InsertionSort - Recursive,0.22,0.59,30.17,1523.5,149223.78
+QuickSort - Iterative (First Pivot),0.1,0.7,0.58,3.13,31.86
+QuickSort - Iterative (Random Pivot),0.9,0.28,0.68,4.95,50.19
+QuickSort - Recursive (First Pivot),0.2,0.12,0.3,2.86,30.92
+QuickSort - Recursive (Median Pivot),0.9,0.11,0.64,3.33,31.18
