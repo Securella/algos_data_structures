@@ -8,11 +8,11 @@ public class FileReaderOutputerModifiedByInclude {
     private static final Set<String> visitedFiles = new HashSet<>(); // To avoid duplicate inclusions
 
     /**
-     * Processes a file and replaces #include statements with the content of the included files.
+     * Processes file and replaces #include statements with content of included files.
      *
-     * @param filename The name of the file to process.
-     * @param depth    The current recursion depth (to prevent infinite loops).
-     * @throws IOException If an I/O error occurs.
+     * @param filename = name of file for processing.
+     * @param depth    Current recursion depth (to prevent infinite loops).
+     * @throws IOException In case of I/O error.
      */
     public static void processFile(String filename, int depth) throws IOException {
         if (depth > MAX_DEPTH) {
@@ -44,7 +44,7 @@ public class FileReaderOutputerModifiedByInclude {
                     String includedFile = parseIncludeStatement(line);
                     if (includedFile != null) {
                         System.out.println("Including file: " + includedFile); // Debug included file
-                        processFile(includedFile, depth + 1); // Recursively process the included file
+                        processFile(includedFile, depth + 1); // Recursively process included file
                     } else {
                         System.err.println("Error: Invalid #include syntax in file: " + filename);
                     }
@@ -61,21 +61,21 @@ public class FileReaderOutputerModifiedByInclude {
     /**
      * Parses the #include statement to extract the filename.
      *
-     * @param line The line containing the #include statement.
-     * @return The filename if valid, or null if invalid.
+     * @param line = line containing the #include statement.
+     * @return filename if valid, otherwise null.
      */
     private static String parseIncludeStatement(String line) {
         int start = line.indexOf('"');
         int end = line.lastIndexOf('"');
         if (start != -1 && end != -1 && start < end) {
-            return line.substring(start + 1, end); // Extract the filename
+            return line.substring(start + 1, end); // Extract filename
         }
         return null; // Invalid #include syntax
     }
 
     public static void main(String[] args) {
         if (args.length != 1) {
-            System.err.println("Usage: java FileReaderOutputerModifiedByInclude <filename>");
+            System.err.println("The only possible usage: java FileReaderOutputerModifiedByInclude <filename>");
             return;
         }
 
