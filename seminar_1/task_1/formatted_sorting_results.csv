@@ -1,7 +1,19 @@
-Algorithm,100,1000,10000,100000,1000000
-InsertionSort - Iterative,0.4,0.9,8.64,440.56,44531.46
-InsertionSort - Recursive,0.22,0.59,30.17,1523.5,149223.78
-QuickSort - Iterative (First Pivot),0.1,0.7,0.58,3.13,31.86
-QuickSort - Iterative (Random Pivot),0.9,0.28,0.68,4.95,50.19
-QuickSort - Recursive (First Pivot),0.2,0.12,0.3,2.86,30.92
-QuickSort - Recursive (Median Pivot),0.9,0.11,0.64,3.33,31.18
+Scenario,Algorithm,100,1000,10000,100000,1000000
+Average-Case,InsertionSort - Iterative,0.4,0.59,19.6,2000.73,202196.51
+Average-Case,InsertionSort - Recursive,0.5,0.59,42.69,1540.96,151431.66
+Average-Case,QuickSort - Iterative (First Pivot),0.3,0.3,0.91,5.63,66.45
+Average-Case,QuickSort - Iterative (Random Pivot),0.3,0.12,1.6,9.2,96.74
+Average-Case,QuickSort - Recursive (First Pivot),0.3,0.6,1.44,5.82,66.82
+Average-Case,QuickSort - Recursive (Median Pivot),0.2,0.23,1.72,5.62,66.51
+Best-Case,InsertionSort - Iterative,0.0,0.2,0.24,0.32,0.7
+Best-Case,InsertionSort - Recursive,0.25,0.1,0.12,0.77,4.18
+Best-Case,QuickSort - Iterative (First Pivot),0.1,0.15,8.93,848.76,84999.75
+Best-Case,QuickSort - Iterative (Random Pivot),0.7,0.16,1.23,6.99,60.6
+Best-Case,QuickSort - Recursive (First Pivot),0.5,1.4,8.4,828.63,83825.85
+Best-Case,QuickSort - Recursive (Median Pivot),0.11,0.8,0.42,1.21,8.96
+Worst-Case,InsertionSort - Iterative,0.1,0.43,42.74,4535.19,427326.46
+Worst-Case,InsertionSort - Recursive,0.1,0.34,30.23,3025.4,313810.4
+Worst-Case,QuickSort - Iterative (First Pivot),0.1,0.18,15.98,1574.38,157970.85
+Worst-Case,QuickSort - Iterative (Random Pivot),0.1,0.6,0.63,6.2,65.23
+Worst-Case,QuickSort - Recursive (First Pivot),0.0,0.2,16.24,1595.65,160050.9
+Worst-Case,QuickSort - Recursive (Median Pivot),0.0,0.1,0.1,1.16,12.79

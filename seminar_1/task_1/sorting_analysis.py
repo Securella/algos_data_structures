@@ -3,7 +3,7 @@
 # Author: Securella
 # Year: 2024
 # Description: This code is part of an individual project for the
-#              seminar and is intended for examination.
+# seminar and is intended for examination.
 #
 # Disclaimer:
 # This is individual work created for a seminar assignment. It should
@@ -14,6 +14,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
 
 # Define target array sizes
 target_sizes = [100, 1000, 10000, 100000, 1000000]
@@ -25,7 +26,7 @@ try:
     data = pd.read_csv(
         "sorting_results.csv",
         header=0,
-        names=['Algorithm', 'Array Size', 'Time_Int', 'Time_Dec', 'Repetitions'],
+        names=['Scenario', 'Algorithm', 'Array Size', 'Time_Int', 'Time_Dec', 'Repetitions'],
         engine='python'
     )
     print("CSV loaded successfully.")
@@ -47,28 +48,44 @@ try:
     data['Array Size'] = pd.to_numeric(data['Array Size'], errors='coerce')
     data['Repetitions'] = pd.to_numeric(data['Repetitions'], errors='coerce')
 
-    # Strip whitespace from 'Algorithm'
+    # Strip whitespace from 'Algorithm' and 'Scenario'
     data['Algorithm'] = data['Algorithm'].astype(str).str.strip()
+    data['Scenario'] = data['Scenario'].astype(str).str.strip()
 
     # Remove unnecessary columns
-    data = data[['Algorithm', 'Array Size', 'Execution Time (ms)', 'Repetitions']]
+    data = data[['Scenario', 'Algorithm', 'Array Size', 'Execution Time (ms)', 'Repetitions']]
 
     # Debug intermediate processed data
     print("\n--- Processed Data (After Cleaning) ---")
     print(data.head())
 
     # Average over repetitions
-    data = data.groupby(['Algorithm', 'Array Size'], as_index=False).agg({'Execution Time (ms)': 'mean'})
+    data = data.groupby(['Scenario', 'Algorithm', 'Array Size'], as_index=False).agg({'Execution Time (ms)': 'mean'})
 
-    # Filter for the target array sizes
+    # Filter for target array sizes
     data = data[data['Array Size'].isin(target_sizes)]
 
     # Ensure proper ordering
-    data = data.sort_values(by='Array Size')
+    data = data.sort_values(by=['Scenario', 'Algorithm', 'Array Size'])
 
     # Debug filtered data
     print("\n--- Filtered Data (Target Sizes Only) ---")
     print(data.head())
+
+    # Check for missing methods
+    expected_methods = [
+        "QuickSort - Recursive (Median Pivot)",
+        "QuickSort - Recursive (Random Pivot)",
+        "QuickSort - Recursive (First Pivot)",
+        "QuickSort - Iterative (Median Pivot)",
+        "QuickSort - Iterative (Random Pivot)",
+        "QuickSort - Iterative (First Pivot)",
+        "InsertionSort - Recursive",
+        "InsertionSort - Iterative"
+    ]
+    missing_methods = [method for method in expected_methods if method not in data['Algorithm'].unique()]
+    if missing_methods:
+        print(f"Warning: The following methods are missing from the dataset: {missing_methods}")
 
 except Exception as e:
     print(f"Error processing data: {e}")
@@ -81,7 +98,7 @@ if data.empty:
 
 # Step 4: Create pivot table
 try:
-    table = data.pivot(index='Algorithm', columns='Array Size', values='Execution Time (ms)')
+    table = data.pivot(index=['Scenario', 'Algorithm'], columns='Array Size', values='Execution Time (ms)')
     print("\n--- Pivot Table ---")
     print(table)
 except Exception as e:
@@ -102,60 +119,106 @@ input_sizes = np.array(target_sizes, dtype=int)
 quicksort_theoretical = input_sizes * np.log2(input_sizes)  # O(n log n)
 insertion_theoretical = input_sizes ** 2                    # O(n^2)
 
-# Step 7: Plot individual algorithm execution times
-for algorithm in table.index:
-    plt.figure(figsize=(8, 5))
-    plt.plot(table.columns, table.loc[algorithm], marker='o', label=algorithm)
-    plt.title(f"{algorithm} Execution Time")
-    plt.xlabel("Array Size")
-    plt.ylabel("Execution Time (ms)")
+# Step 7: Plot individual algorithm execution times for each scenario
+for scenario in data['Scenario'].unique():
+    scenario_data = data[data['Scenario'] == scenario]
+    for algorithm in scenario_data['Algorithm'].unique():
+        subset = scenario_data[scenario_data['Algorithm'] == algorithm]
+        plt.figure(figsize=(10, 6))
+        plt.plot(
+            subset['Array Size'],
+            subset['Execution Time (ms)'],
+            marker='o',
+            linestyle='-',
+            label=f"{algorithm} ({scenario})",
+            linewidth=2
+        )
+        plt.title(f"{algorithm} Execution Time ({scenario} Case)", fontsize=14)
+        plt.xlabel("Array Size", fontsize=12)
+        plt.ylabel("Execution Time (ms)", fontsize=12)
+        plt.xscale("log")
+        plt.yscale("log")
+        plt.grid(True, which="both", linestyle="--", linewidth=0.5)
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(f"{algorithm}_{scenario}_performance_plot.png")
+        plt.show()
+
+# Step 8: Combined plot for each algorithm across all scenarios
+for algorithm in data['Algorithm'].unique():
+    plt.figure(figsize=(12, 8))
+    for scenario in data['Scenario'].unique():
+        subset = data[(data['Algorithm'] == algorithm) & (data['Scenario'] == scenario)]
+        plt.plot(
+            subset['Array Size'],
+            subset['Execution Time (ms)'],
+            marker='o',
+            linestyle='-',
+            label=f"{scenario} Case",
+            linewidth=2
+        )
+    plt.title(f"{algorithm} - Performance Across Scenarios", fontsize=16)
+    plt.xlabel("Array Size", fontsize=14)
+    plt.ylabel("Execution Time (ms)", fontsize=14)
     plt.xscale("log")
     plt.yscale("log")
+    plt.legend(fontsize=12, title="Scenario")
     plt.grid(True, which="both", linestyle="--", linewidth=0.5)
-    plt.legend()
-    plt.savefig(f"{algorithm}_performance_plot.png")
+    plt.tight_layout()
+    plt.savefig(f"{algorithm}_scenarios_comparison.png")
     plt.show()
 
-# Step 8: Grouped plot for QuickSort with theoretical complexity
-quick_sort_methods = [alg for alg in table.index if "QuickSort" in alg]
-if quick_sort_methods:
-    plt.figure(figsize=(10, 6))
-    for algorithm in quick_sort_methods:
-        plt.plot(table.columns, table.loc[algorithm], marker='o', label=algorithm)
-    plt.plot(
-        input_sizes,
-        quicksort_theoretical / quicksort_theoretical[-1] * table.loc[quick_sort_methods[0]].max(),
-        linestyle='--', color='gray', label="O(n log n) theoretical"
-    )
-    plt.title("QuickSort Variants with Theoretical O(n log n) Complexity")
-    plt.xlabel("Array Size")
-    plt.ylabel("Execution Time (ms)")
-    plt.xscale("log")
-    plt.yscale("log")
-    plt.legend(title="QuickSort Method")
-    plt.grid(True, which="both", linestyle="--", linewidth=0.5)
-    plt.savefig("quick_sort_with_theoretical.png")
-    plt.show()
-else:
-    print("Warning: No QuickSort methods found in the data. Skipping QuickSort plot.")
+# Step 9: Diagram for input size 1000000
+try:
+    specific_size = 1000000
+    data_1000000 = data[data['Array Size'] == specific_size]
 
-# Step 9: Grouped plot for InsertionSort with theoretical complexity
-insertion_methods = [alg for alg in table.index if "InsertionSort" in alg]
-if insertion_methods:
-    plt.figure(figsize=(8, 5))
-    for algorithm in insertion_methods:
-        plt.plot(table.columns, table.loc[algorithm], marker='o', label=algorithm)
-    plt.plot(
-        input_sizes,
-        insertion_theoretical / insertion_theoretical[-1] * table.loc[insertion_methods[0]].max(),
-        linestyle='--', color='gray', label="O(n^2) theoretical"
-    )
-    plt.title("InsertionSort Variants with Theoretical O(n^2) Complexity")
-    plt.xlabel("Array Size")
-    plt.ylabel("Execution Time (ms)")
-    plt.xscale("log")
-    plt.yscale("log")
-    plt.legend(title="InsertionSort Method")
-    plt.grid(True, which="both", linestyle="--", linewidth=0.5)
-    plt.savefig("insertion_sort_with_theoretical.png")
-    plt.show()
+    if not data_1000000.empty:
+        plt.figure(figsize=(12, 8))
+        bar_width = 0.2  # Width for grouped bars
+        x = np.arange(len(data_1000000['Algorithm'].unique()))
+        for i, scenario in enumerate(data_1000000['Scenario'].unique()):
+            subset = data_1000000[data_1000000['Scenario'] == scenario]
+            plt.bar(
+                x + i * bar_width,
+                subset['Execution Time (ms)'],
+                width=bar_width,
+                label=scenario
+            )
+        plt.title(f"Execution Time for Input Size {specific_size} Across Scenarios", fontsize=16)
+        plt.xlabel("Algorithm", fontsize=14)
+        plt.ylabel("Execution Time (ms)", fontsize=14)
+        plt.xticks(x + bar_width, data_1000000['Algorithm'].unique(), rotation=45, ha='right', fontsize=12)
+        plt.legend(title="Scenario", fontsize=12)
+        plt.grid(axis='y', linestyle="--", linewidth=0.5)
+        plt.tight_layout()
+        plt.savefig(f"execution_time_input_{specific_size}_scenarios.png")
+        plt.show()
+    else:
+        print(f"No data found for input size {specific_size}.")
+except Exception as e:
+    print(f"Error creating diagram for input size {specific_size}: {e}")
+
+# Step 10: Save all graphs into a single PDF
+try:
+    with PdfPages("all_plots.pdf") as pdf:
+        for algorithm in data['Algorithm'].unique():
+            for scenario in data['Scenario'].unique():
+                subset = data[(data['Algorithm'] == algorithm) & (data['Scenario'] == scenario)]
+                if not subset.empty:
+                    fig = plt.figure()
+                    plt.plot(
+                        subset['Array Size'],
+                        subset['Execution Time (ms)'],
+                        marker='o',
+                        label=f"{algorithm} ({scenario})"
+                    )
+                    plt.title(f"{algorithm} ({scenario}) Performance", fontsize=14)
+                    plt.xlabel("Array Size", fontsize=12)
+                    plt.ylabel("Execution Time (ms)", fontsize=12)
+                    plt.legend()
+                    pdf.savefig(fig)
+                    plt.close(fig)
+        print("All plots saved into 'all_plots.pdf'.")
+except Exception as e:
+    print(f"Error saving plots into PDF: {e}")

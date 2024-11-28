@@ -18,7 +18,7 @@ import java.util.Random;
  */
 
 public class QuickSort {
-    
+
     // Recursive QuickSort with median-of-three pivot
     public static void quickSortRecursiveMedian(int[] arr, int low, int high) {
         if (low < high) {
@@ -28,9 +28,20 @@ public class QuickSort {
         }
     }
 
-    // Iterative QuickSort with random pivot
-    public static void quickSortIterativeRandom(int[] arr) {
-        int[] stack = new int[arr.length];
+    // Recursive QuickSort with random pivot
+    public static void quickSortRecursiveRandom(int[] arr, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partitionRandom(arr, low, high);
+            quickSortRecursiveRandom(arr, low, pivotIndex - 1);
+            quickSortRecursiveRandom(arr, pivotIndex + 1, high);
+        }
+    }
+
+    // Iterative QuickSort with median-of-three pivot
+    public static void quickSortIterativeMedian(int[] arr) {
+        if (arr == null || arr.length <= 1) return;
+
+        int[] stack = new int[arr.length * 2];
         int top = -1;
 
         stack[++top] = 0;
@@ -39,12 +50,47 @@ public class QuickSort {
         while (top >= 0) {
             int high = stack[top--];
             int low = stack[top--];
+
+            if (low < high) {
+                int pivotIndex = partitionMedian(arr, low, high);
+
+                if (pivotIndex + 1 <= high) {
+                    stack[++top] = pivotIndex + 1;
+                    stack[++top] = high;
+                }
+                if (low <= pivotIndex - 1) {
+                    stack[++top] = low;
+                    stack[++top] = pivotIndex - 1;
+                }
+            }
+        }
+    }
+
+    // Iterative QuickSort with random pivot
+    public static void quickSortIterativeRandom(int[] arr) {
+        if (arr == null || arr.length <= 1) return;
+
+        int[] stack = new int[arr.length * 2];
+        int top = -1;
+
+        stack[++top] = 0;
+        stack[++top] = arr.length - 1;
+
+        while (top >= 0) {
+            int high = stack[top--];
+            int low = stack[top--];
+
             if (low < high) {
                 int pivotIndex = partitionRandom(arr, low, high);
-                stack[++top] = low;
-                stack[++top] = pivotIndex - 1;
-                stack[++top] = pivotIndex + 1;
-                stack[++top] = high;
+
+                if (pivotIndex + 1 <= high) {
+                    stack[++top] = pivotIndex + 1;
+                    stack[++top] = high;
+                }
+                if (low <= pivotIndex - 1) {
+                    stack[++top] = low;
+                    stack[++top] = pivotIndex - 1;
+                }
             }
         }
     }
@@ -60,7 +106,9 @@ public class QuickSort {
 
     // Iterative QuickSort with pivot = array[0]
     public static void quickSortIterativeFirstPivot(int[] arr) {
-        int[] stack = new int[arr.length];
+        if (arr == null || arr.length <= 1) return;
+
+        int[] stack = new int[arr.length * 2];
         int top = -1;
 
         stack[++top] = 0;
@@ -69,12 +117,18 @@ public class QuickSort {
         while (top >= 0) {
             int high = stack[top--];
             int low = stack[top--];
+
             if (low < high) {
                 int pivotIndex = partitionFirst(arr, low, high);
-                stack[++top] = low;
-                stack[++top] = pivotIndex - 1;
-                stack[++top] = pivotIndex + 1;
-                stack[++top] = high;
+
+                if (pivotIndex + 1 <= high) {
+                    stack[++top] = pivotIndex + 1;
+                    stack[++top] = high;
+                }
+                if (low <= pivotIndex - 1) {
+                    stack[++top] = low;
+                    stack[++top] = pivotIndex - 1;
+                }
             }
         }
     }
@@ -83,9 +137,10 @@ public class QuickSort {
     private static int partitionMedian(int[] arr, int low, int high) {
         int mid = low + (high - low) / 2;
         int pivot = median(arr[low], arr[mid], arr[high]);
+
         while (low <= high) {
-            while (arr[low] < pivot) low++;
-            while (arr[high] > pivot) high--;
+            while (low <= high && arr[low] < pivot) low++;
+            while (low <= high && arr[high] > pivot) high--;
             if (low <= high) {
                 swap(arr, low, high);
                 low++;
@@ -99,9 +154,10 @@ public class QuickSort {
     private static int partitionRandom(int[] arr, int low, int high) {
         int pivotIndex = new Random().nextInt(high - low + 1) + low;
         int pivot = arr[pivotIndex];
+
         while (low <= high) {
-            while (arr[low] < pivot) low++;
-            while (arr[high] > pivot) high--;
+            while (low <= high && arr[low] < pivot) low++;
+            while (low <= high && arr[high] > pivot) high--;
             if (low <= high) {
                 swap(arr, low, high);
                 low++;
@@ -114,16 +170,18 @@ public class QuickSort {
     // Helper method: partition using pivot = array[0]
     private static int partitionFirst(int[] arr, int low, int high) {
         int pivot = arr[low];
-        while (low <= high) {
-            while (arr[low] < pivot) low++;
-            while (arr[high] > pivot) high--;
-            if (low <= high) {
-                swap(arr, low, high);
-                low++;
-                high--;
+        int left = low + 1;
+        int right = high;
+
+        while (left <= right) {
+            while (left <= high && arr[left] <= pivot) left++;
+            while (right > low && arr[right] > pivot) right--;
+            if (left < right) {
+                swap(arr, left, right);
             }
         }
-        return low;
+        swap(arr, low, right);
+        return right;
     }
 
     // Median of three
@@ -137,5 +195,18 @@ public class QuickSort {
         arr[i] = arr[j];
         arr[j] = temp;
     }
+
+    // Debugging helper: print array
+    public static void printArray(int[] arr) {
+        if (arr == null) {
+            System.out.println("Array is null.");
+            return;
+        }
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
 }
+
 
