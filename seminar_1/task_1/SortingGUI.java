@@ -14,7 +14,7 @@ import java.util.Scanner;
  * Author: Securella
  * Year: 2024
  * Description: This code is part of an individual project for the
- * seminar and is intended for examination.
+ *              seminar and is intended for examination.
  * 
  * Disclaimer:
  * This is original work created for a seminar assignment. It should

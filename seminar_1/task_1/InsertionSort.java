@@ -13,10 +13,11 @@ package algos_data_structures.seminar_1.task_1;
  * not be copied, shared, or used as a reference for similar projects without permission
  * Unauthorized use of this code is strictly prohibited by the educational institution.
  * 
- * Source: 
- * The implementation and understanding of Insertion Sort were referenced from
- * "Data Structures and Algorithm Analysis in Java, 3rd Edition" by Mark Allen Weiss,
- * Pearson Education, 2012. ISBN: 978-0-273-75211-0.
+ * Sources: 
+ * 1. "Data Structures and Algorithm Analysis in Java, 3rd Edition" 
+ *    by Mark Allen Weiss, Pearson Education, 2012. ISBN: 978-0-273-75211-0.
+ * 2. GeeksforGeeks: "Insertion Sort Algorithm"
+ *    URL: https://www.geeksforgeeks.org/insertion-sort/
  * =============================================================
  */
 
