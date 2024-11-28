@@ -14,6 +14,12 @@ import java.util.Random;
  * This is original work created for a seminar assignment. It should
  * not be copied, shared, or used as a reference for similar projects.
  * Unauthorized use of this code is strictly prohibited by the educational institution.
+ * 
+ * Source:
+ * The implementation and understanding of QuickSort, including pivot strategies such as 
+ * "median-of-three" and "random pivot," were referenced from "Data Structures and Algorithm 
+ * Analysis in Java, 3rd Edition" by Mark Allen Weiss, Pearson Education, 2012. 
+ * ISBN: 978-0-273-75211-0.
  * =============================================================
  */
 
