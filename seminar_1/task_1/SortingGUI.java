@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Locale;
 
 /*
  * =============================================================
@@ -70,8 +71,8 @@ public class SortingGUI extends JFrame {
     }
 
     /**
-     * Parses user-defined array sizes, then runs each sorting algorithm on these sizes.
-     * Logs execution times and saves results to CSV file.
+     * Parsing user-defined array sizes, then runs each sorting algorithm on these sizes.
+     * Logging execution times and saving results to CSV file.
      */
     private void runBulkTests() {
         String[] sizeStrings = arraySizesField.getText().split(",");
@@ -99,7 +100,9 @@ public class SortingGUI extends JFrame {
             @Override
             protected Void doInBackground() {
                 try (FileWriter writer = new FileWriter("sorting_results.csv")) {
-                    writer.write("Scenario,Algorithm,Array Size,Execution Time (ms),Repetitions\n");
+                    // Add header with fixed-width columns (to fix issue with csv)
+                    writer.write(String.format("%-15s;%-35s;%-10s;%-20s;%-10s\n", 
+                        "Scenario", "Algorithm", "Array Size", "Execution Time (ms)", "Repetitions"));
     
                     String[] algorithms = {
                         "QuickSort - Recursive (Median Pivot)",
@@ -111,13 +114,13 @@ public class SortingGUI extends JFrame {
                         "InsertionSort - Recursive",
                         "InsertionSort - Iterative"
                     };
-
+    
                     String[] scenarios = {"Best-Case", "Average-Case", "Worst-Case"};
     
                     progressBar.setMaximum(algorithms.length * sizes.length * scenarios.length);
                     int progress = 0;
     
-                    final int repetitions = 10; // Repeat each test 5 times
+                    final int repetitions = 10; // Number of repetitions for averaging
                     for (String scenario : scenarios) {
                         for (String algorithm : algorithms) {
                             for (int size : sizes) {
@@ -159,22 +162,26 @@ public class SortingGUI extends JFrame {
                                         break;
                                     }
                                     long endTime = System.nanoTime();
-                                    totalExecutionTime += (endTime - startTime) / 1e6;
+                                    totalExecutionTime += (endTime - startTime) / 1e6; // Convert to milliseconds
                                 }
     
                                 double averageExecutionTime = totalExecutionTime / repetitions;
-                                writer.write(String.format("%s,%s,%d,%.2f,%d\n", scenario, algorithm, size, averageExecutionTime, repetitions));
-                                outputArea.append(String.format("%s - %s - Size %d (Avg over %d): %.2f ms\n", scenario, algorithm, size, repetitions, averageExecutionTime));
+    
+                                // Write the data to the CSV file with fixed-width alignment
+                                writer.write(String.format(Locale.US, "%-15s;%-35s;%-10d;%-20.2f;%-10d\n", 
+                                    scenario, algorithm, size, averageExecutionTime, repetitions));
+                                outputArea.append(String.format("%s - %s - Size %d (Avg over %d): %.2f ms\n", 
+                                    scenario, algorithm, size, repetitions, averageExecutionTime));
     
                                 progressBar.setValue(++progress);
                             }
                         }
                     }
                     outputArea.append("All tests completed. Results successfully saved to sorting_results.csv.\n");
-
+    
                     // Triggering Python visualization script
                     triggerPythonScript();
-
+    
                 } catch (IOException e) {
                     outputArea.append("Error writing to results file: " + e.getMessage() + "\n");
                     e.printStackTrace();
@@ -231,19 +238,23 @@ public class SortingGUI extends JFrame {
         }
     }
 
-    /**
+/**
  * Triggering Python script for visualizations.
  */
 private void triggerPythonScript() {
     try {
         File pythonScript = new File("sorting_analysis.py");
+
+        // Debugging: Log the working directory
+        outputArea.append("Current Working Directory: " + System.getProperty("user.dir") + "\n");
+
         if (!pythonScript.exists()) {
             outputArea.append("Error: Python script 'sorting_analysis.py' not found.\n");
             return;
         }
 
         outputArea.append("Starting visualization script...\n");
-        
+
         // Using ProcessBuilder with full path to python3 (if needed)
         ProcessBuilder processBuilder = new ProcessBuilder("python3", pythonScript.getAbsolutePath());
         processBuilder.redirectErrorStream(true); // Combine error stream with output stream

@@ -1,91 +1,121 @@
-Scenario,Algorithm,Array Size,Execution Time (ms),Repetitions
-Best-Case,QuickSort - Recursive (Median Pivot),100,0,11,5
-Best-Case,QuickSort - Recursive (Median Pivot),1000,0,08,5
-Best-Case,QuickSort - Recursive (Median Pivot),10000,0,42,5
-Best-Case,QuickSort - Recursive (Median Pivot),100000,1,21,5
-Best-Case,QuickSort - Recursive (Median Pivot),1000000,8,96,5
-Best-Case,QuickSort - Iterative (Random Pivot),100,0,07,5
-Best-Case,QuickSort - Iterative (Random Pivot),1000,0,16,5
-Best-Case,QuickSort - Iterative (Random Pivot),10000,1,23,5
-Best-Case,QuickSort - Iterative (Random Pivot),100000,6,99,5
-Best-Case,QuickSort - Iterative (Random Pivot),1000000,60,06,5
-Best-Case,QuickSort - Recursive (First Pivot),100,0,05,5
-Best-Case,QuickSort - Recursive (First Pivot),1000,1,04,5
-Best-Case,QuickSort - Recursive (First Pivot),10000,8,40,5
-Best-Case,QuickSort - Recursive (First Pivot),100000,828,63,5
-Best-Case,QuickSort - Recursive (First Pivot),1000000,83825,85,5
-Best-Case,QuickSort - Iterative (First Pivot),100,0,01,5
-Best-Case,QuickSort - Iterative (First Pivot),1000,0,15,5
-Best-Case,QuickSort - Iterative (First Pivot),10000,8,93,5
-Best-Case,QuickSort - Iterative (First Pivot),100000,848,76,5
-Best-Case,QuickSort - Iterative (First Pivot),1000000,84999,75,5
-Best-Case,InsertionSort - Recursive,100,0,25,5
-Best-Case,InsertionSort - Recursive,1000,0,01,5
-Best-Case,InsertionSort - Recursive,10000,0,12,5
-Best-Case,InsertionSort - Recursive,100000,0,77,5
-Best-Case,InsertionSort - Recursive,1000000,4,18,5
-Best-Case,InsertionSort - Iterative,100,0,00,5
-Best-Case,InsertionSort - Iterative,1000,0,02,5
-Best-Case,InsertionSort - Iterative,10000,0,24,5
-Best-Case,InsertionSort - Iterative,100000,0,32,5
-Best-Case,InsertionSort - Iterative,1000000,0,70,5
-Average-Case,QuickSort - Recursive (Median Pivot),100,0,02,5
-Average-Case,QuickSort - Recursive (Median Pivot),1000,0,23,5
-Average-Case,QuickSort - Recursive (Median Pivot),10000,1,72,5
-Average-Case,QuickSort - Recursive (Median Pivot),100000,5,62,5
-Average-Case,QuickSort - Recursive (Median Pivot),1000000,66,51,5
-Average-Case,QuickSort - Iterative (Random Pivot),100,0,03,5
-Average-Case,QuickSort - Iterative (Random Pivot),1000,0,12,5
-Average-Case,QuickSort - Iterative (Random Pivot),10000,1,06,5
-Average-Case,QuickSort - Iterative (Random Pivot),100000,9,20,5
-Average-Case,QuickSort - Iterative (Random Pivot),1000000,96,74,5
-Average-Case,QuickSort - Recursive (First Pivot),100,0,03,5
-Average-Case,QuickSort - Recursive (First Pivot),1000,0,06,5
-Average-Case,QuickSort - Recursive (First Pivot),10000,1,44,5
-Average-Case,QuickSort - Recursive (First Pivot),100000,5,82,5
-Average-Case,QuickSort - Recursive (First Pivot),1000000,66,82,5
-Average-Case,QuickSort - Iterative (First Pivot),100,0,03,5
-Average-Case,QuickSort - Iterative (First Pivot),1000,0,30,5
-Average-Case,QuickSort - Iterative (First Pivot),10000,0,91,5
-Average-Case,QuickSort - Iterative (First Pivot),100000,5,63,5
-Average-Case,QuickSort - Iterative (First Pivot),1000000,66,45,5
-Average-Case,InsertionSort - Recursive,100,0,05,5
-Average-Case,InsertionSort - Recursive,1000,0,59,5
-Average-Case,InsertionSort - Recursive,10000,42,69,5
-Average-Case,InsertionSort - Recursive,100000,1540,96,5
-Average-Case,InsertionSort - Recursive,1000000,151431,66,5
-Average-Case,InsertionSort - Iterative,100,0,04,5
-Average-Case,InsertionSort - Iterative,1000,0,59,5
-Average-Case,InsertionSort - Iterative,10000,19,06,5
-Average-Case,InsertionSort - Iterative,100000,2000,73,5
-Average-Case,InsertionSort - Iterative,1000000,202196,51,5
-Worst-Case,QuickSort - Recursive (Median Pivot),100,0,00,5
-Worst-Case,QuickSort - Recursive (Median Pivot),1000,0,01,5
-Worst-Case,QuickSort - Recursive (Median Pivot),10000,0,10,5
-Worst-Case,QuickSort - Recursive (Median Pivot),100000,1,16,5
-Worst-Case,QuickSort - Recursive (Median Pivot),1000000,12,79,5
-Worst-Case,QuickSort - Iterative (Random Pivot),100,0,01,5
-Worst-Case,QuickSort - Iterative (Random Pivot),1000,0,06,5
-Worst-Case,QuickSort - Iterative (Random Pivot),10000,0,63,5
-Worst-Case,QuickSort - Iterative (Random Pivot),100000,6,02,5
-Worst-Case,QuickSort - Iterative (Random Pivot),1000000,65,23,5
-Worst-Case,QuickSort - Recursive (First Pivot),100,0,00,5
-Worst-Case,QuickSort - Recursive (First Pivot),1000,0,20,5
-Worst-Case,QuickSort - Recursive (First Pivot),10000,16,24,5
-Worst-Case,QuickSort - Recursive (First Pivot),100000,1595,65,5
-Worst-Case,QuickSort - Recursive (First Pivot),1000000,160050,09,5
-Worst-Case,QuickSort - Iterative (First Pivot),100,0,01,5
-Worst-Case,QuickSort - Iterative (First Pivot),1000,0,18,5
-Worst-Case,QuickSort - Iterative (First Pivot),10000,15,98,5
-Worst-Case,QuickSort - Iterative (First Pivot),100000,1574,38,5
-Worst-Case,QuickSort - Iterative (First Pivot),1000000,157970,85,5
-Worst-Case,InsertionSort - Recursive,100,0,01,5
-Worst-Case,InsertionSort - Recursive,1000,0,34,5
-Worst-Case,InsertionSort - Recursive,10000,30,23,5
-Worst-Case,InsertionSort - Recursive,100000,3025,04,5
-Worst-Case,InsertionSort - Recursive,1000000,313810,40,5
-Worst-Case,InsertionSort - Iterative,100,0,01,5
-Worst-Case,InsertionSort - Iterative,1000,0,43,5
-Worst-Case,InsertionSort - Iterative,10000,42,74,5
-Worst-Case,InsertionSort - Iterative,100000,4535,19,5
-Worst-Case,InsertionSort - Iterative,1000000,427326,46,5
+Scenario       ;Algorithm                          ;Array Size;Execution Time (ms) ;Repetitions
+Best-Case      ;QuickSort - Recursive (Median Pivot);100       ;0.05                ;10        
+Best-Case      ;QuickSort - Recursive (Median Pivot);1000      ;0.05                ;10        
+Best-Case      ;QuickSort - Recursive (Median Pivot);10000     ;0.40                ;10        
+Best-Case      ;QuickSort - Recursive (Median Pivot);100000    ;1.38                ;10        
+Best-Case      ;QuickSort - Recursive (Median Pivot);1000000   ;15.56               ;10        
+Best-Case      ;QuickSort - Iterative (Random Pivot);100       ;0.07                ;10        
+Best-Case      ;QuickSort - Iterative (Random Pivot);1000      ;0.10                ;10        
+Best-Case      ;QuickSort - Iterative (Random Pivot);10000     ;0.89                ;10        
+Best-Case      ;QuickSort - Iterative (Random Pivot);100000    ;3.74                ;10        
+Best-Case      ;QuickSort - Iterative (Random Pivot);1000000   ;37.85               ;10        
+Best-Case      ;QuickSort - Recursive (First Pivot);100       ;0.03                ;10        
+Best-Case      ;QuickSort - Recursive (First Pivot);1000      ;0.13                ;10        
+Best-Case      ;QuickSort - Recursive (First Pivot);10000     ;1.64                ;10        
+Best-Case      ;QuickSort - Recursive (First Pivot);100000    ;24.78               ;10        
+Best-Case      ;QuickSort - Recursive (First Pivot);1000000   ;2272.23             ;10        
+Best-Case      ;QuickSort - Iterative (Median Pivot);100       ;0.00                ;10        
+Best-Case      ;QuickSort - Iterative (Median Pivot);1000      ;0.00                ;10        
+Best-Case      ;QuickSort - Iterative (Median Pivot);10000     ;0.00                ;10        
+Best-Case      ;QuickSort - Iterative (Median Pivot);100000    ;0.00                ;10        
+Best-Case      ;QuickSort - Iterative (Median Pivot);1000000   ;0.00                ;10        
+Best-Case      ;QuickSort - Iterative (Random Pivot);100       ;0.00                ;10        
+Best-Case      ;QuickSort - Iterative (Random Pivot);1000      ;0.04                ;10        
+Best-Case      ;QuickSort - Iterative (Random Pivot);10000     ;0.37                ;10        
+Best-Case      ;QuickSort - Iterative (Random Pivot);100000    ;3.63                ;10        
+Best-Case      ;QuickSort - Iterative (Random Pivot);1000000   ;36.50               ;10        
+Best-Case      ;QuickSort - Iterative (First Pivot);100       ;0.01                ;10        
+Best-Case      ;QuickSort - Iterative (First Pivot);1000      ;0.07                ;10        
+Best-Case      ;QuickSort - Iterative (First Pivot);10000     ;0.64                ;10        
+Best-Case      ;QuickSort - Iterative (First Pivot);100000    ;24.59               ;10        
+Best-Case      ;QuickSort - Iterative (First Pivot);1000000   ;2275.11             ;10        
+Best-Case      ;InsertionSort - Recursive          ;100       ;0.04                ;10        
+Best-Case      ;InsertionSort - Recursive          ;1000      ;0.01                ;10        
+Best-Case      ;InsertionSort - Recursive          ;10000     ;0.04                ;10        
+Best-Case      ;InsertionSort - Recursive          ;100000    ;0.44                ;10        
+Best-Case      ;InsertionSort - Recursive          ;1000000   ;4.38                ;10        
+Best-Case      ;InsertionSort - Iterative          ;100       ;0.00                ;10        
+Best-Case      ;InsertionSort - Iterative          ;1000      ;0.02                ;10        
+Best-Case      ;InsertionSort - Iterative          ;10000     ;0.14                ;10        
+Best-Case      ;InsertionSort - Iterative          ;100000    ;0.06                ;10        
+Best-Case      ;InsertionSort - Iterative          ;1000000   ;0.17                ;10        
+Average-Case   ;QuickSort - Recursive (Median Pivot);100       ;0.02                ;10        
+Average-Case   ;QuickSort - Recursive (Median Pivot);1000      ;0.06                ;10        
+Average-Case   ;QuickSort - Recursive (Median Pivot);10000     ;0.34                ;10        
+Average-Case   ;QuickSort - Recursive (Median Pivot);100000    ;3.36                ;10        
+Average-Case   ;QuickSort - Recursive (Median Pivot);1000000   ;34.21               ;10        
+Average-Case   ;QuickSort - Iterative (Random Pivot);100       ;0.02                ;10        
+Average-Case   ;QuickSort - Iterative (Random Pivot);1000      ;0.14                ;10        
+Average-Case   ;QuickSort - Iterative (Random Pivot);10000     ;0.69                ;10        
+Average-Case   ;QuickSort - Iterative (Random Pivot);100000    ;5.14                ;10        
+Average-Case   ;QuickSort - Iterative (Random Pivot);1000000   ;53.12               ;10        
+Average-Case   ;QuickSort - Recursive (First Pivot);100       ;0.02                ;10        
+Average-Case   ;QuickSort - Recursive (First Pivot);1000      ;0.25                ;10        
+Average-Case   ;QuickSort - Recursive (First Pivot);10000     ;0.56                ;10        
+Average-Case   ;QuickSort - Recursive (First Pivot);100000    ;25.99               ;10        
+Average-Case   ;QuickSort - Recursive (First Pivot);1000000   ;2295.51             ;10        
+Average-Case   ;QuickSort - Iterative (Median Pivot);100       ;0.00                ;10        
+Average-Case   ;QuickSort - Iterative (Median Pivot);1000      ;0.00                ;10        
+Average-Case   ;QuickSort - Iterative (Median Pivot);10000     ;0.00                ;10        
+Average-Case   ;QuickSort - Iterative (Median Pivot);100000    ;0.00                ;10        
+Average-Case   ;QuickSort - Iterative (Median Pivot);1000000   ;0.00                ;10        
+Average-Case   ;QuickSort - Iterative (Random Pivot);100       ;0.01                ;10        
+Average-Case   ;QuickSort - Iterative (Random Pivot);1000      ;0.06                ;10        
+Average-Case   ;QuickSort - Iterative (Random Pivot);10000     ;0.50                ;10        
+Average-Case   ;QuickSort - Iterative (Random Pivot);100000    ;5.20                ;10        
+Average-Case   ;QuickSort - Iterative (Random Pivot);1000000   ;53.22               ;10        
+Average-Case   ;QuickSort - Iterative (First Pivot);100       ;0.01                ;10        
+Average-Case   ;QuickSort - Iterative (First Pivot);1000      ;0.05                ;10        
+Average-Case   ;QuickSort - Iterative (First Pivot);10000     ;0.56                ;10        
+Average-Case   ;QuickSort - Iterative (First Pivot);100000    ;25.98               ;10        
+Average-Case   ;QuickSort - Iterative (First Pivot);1000000   ;2434.05             ;10        
+Average-Case   ;InsertionSort - Recursive          ;100       ;0.04                ;10        
+Average-Case   ;InsertionSort - Recursive          ;1000      ;1.25                ;10        
+Average-Case   ;InsertionSort - Recursive          ;10000     ;15.15               ;10        
+Average-Case   ;InsertionSort - Recursive          ;100000    ;1564.07             ;10        
+Average-Case   ;InsertionSort - Recursive          ;1000000   ;153244.76           ;10        
+Average-Case   ;InsertionSort - Iterative          ;100       ;0.03                ;10        
+Average-Case   ;InsertionSort - Iterative          ;1000      ;0.25                ;10        
+Average-Case   ;InsertionSort - Iterative          ;10000     ;6.86                ;10        
+Average-Case   ;InsertionSort - Iterative          ;100000    ;688.46              ;10        
+Average-Case   ;InsertionSort - Iterative          ;1000000   ;70145.82            ;10        
+Worst-Case     ;QuickSort - Recursive (Median Pivot);100       ;0.00                ;10        
+Worst-Case     ;QuickSort - Recursive (Median Pivot);1000      ;0.01                ;10        
+Worst-Case     ;QuickSort - Recursive (Median Pivot);10000     ;0.11                ;10        
+Worst-Case     ;QuickSort - Recursive (Median Pivot);100000    ;1.36                ;10        
+Worst-Case     ;QuickSort - Recursive (Median Pivot);1000000   ;15.93               ;10        
+Worst-Case     ;QuickSort - Iterative (Random Pivot);100       ;0.00                ;10        
+Worst-Case     ;QuickSort - Iterative (Random Pivot);1000      ;0.05                ;10        
+Worst-Case     ;QuickSort - Iterative (Random Pivot);10000     ;0.32                ;10        
+Worst-Case     ;QuickSort - Iterative (Random Pivot);100000    ;3.28                ;10        
+Worst-Case     ;QuickSort - Iterative (Random Pivot);1000000   ;35.37               ;10        
+Worst-Case     ;QuickSort - Recursive (First Pivot);100       ;0.00                ;10        
+Worst-Case     ;QuickSort - Recursive (First Pivot);1000      ;0.08                ;10        
+Worst-Case     ;QuickSort - Recursive (First Pivot);10000     ;5.77                ;10        
+Worst-Case     ;QuickSort - Recursive (First Pivot);100000    ;633.18              ;10        
+Worst-Case     ;QuickSort - Recursive (First Pivot);1000000   ;65440.96            ;10        
+Worst-Case     ;QuickSort - Iterative (Median Pivot);100       ;0.00                ;10        
+Worst-Case     ;QuickSort - Iterative (Median Pivot);1000      ;0.00                ;10        
+Worst-Case     ;QuickSort - Iterative (Median Pivot);10000     ;0.00                ;10        
+Worst-Case     ;QuickSort - Iterative (Median Pivot);100000    ;0.00                ;10        
+Worst-Case     ;QuickSort - Iterative (Median Pivot);1000000   ;0.00                ;10        
+Worst-Case     ;QuickSort - Iterative (Random Pivot);100       ;0.00                ;10        
+Worst-Case     ;QuickSort - Iterative (Random Pivot);1000      ;0.04                ;10        
+Worst-Case     ;QuickSort - Iterative (Random Pivot);10000     ;0.31                ;10        
+Worst-Case     ;QuickSort - Iterative (Random Pivot);100000    ;3.24                ;10        
+Worst-Case     ;QuickSort - Iterative (Random Pivot);1000000   ;35.17               ;10        
+Worst-Case     ;QuickSort - Iterative (First Pivot);100       ;0.00                ;10        
+Worst-Case     ;QuickSort - Iterative (First Pivot);1000      ;0.08                ;10        
+Worst-Case     ;QuickSort - Iterative (First Pivot);10000     ;5.82                ;10        
+Worst-Case     ;QuickSort - Iterative (First Pivot);100000    ;636.73              ;10        
+Worst-Case     ;QuickSort - Iterative (First Pivot);1000000   ;65237.46            ;10        
+Worst-Case     ;InsertionSort - Recursive          ;100       ;0.00                ;10        
+Worst-Case     ;InsertionSort - Recursive          ;1000      ;0.33                ;10        
+Worst-Case     ;InsertionSort - Recursive          ;10000     ;29.89               ;10        
+Worst-Case     ;InsertionSort - Recursive          ;100000    ;3429.86             ;10        
+Worst-Case     ;InsertionSort - Recursive          ;1000000   ;301368.80           ;10        
+Worst-Case     ;InsertionSort - Iterative          ;100       ;0.00                ;10        
+Worst-Case     ;InsertionSort - Iterative          ;1000      ;0.19                ;10        
+Worst-Case     ;InsertionSort - Iterative          ;10000     ;14.34               ;10        
+Worst-Case     ;InsertionSort - Iterative          ;100000    ;1390.33             ;10        
+Worst-Case     ;InsertionSort - Iterative          ;1000000   ;137806.57           ;10        
