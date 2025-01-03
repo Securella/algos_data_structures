@@ -15,7 +15,7 @@ import java.util.Arrays;
  *  (f) Additional rehashing approaches
  *
  * "Being creative" -> showing collision notes, chain length, etc.
- * References:
+ * Reference:
  *   Mark Allen Weiss (Hashing)
  */
 public class Task2GUI extends JFrame {
